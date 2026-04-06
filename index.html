@@ -606,63 +606,253 @@
   }
   .podcast h2 { font-size: clamp(28px, 3vw, 40px); margin-bottom: 12px; }
   .podcast-intro { font-size: 18px; color: var(--text); line-height: 1.6; margin-bottom: 48px; max-width: 620px; margin-left: auto; margin-right: auto; }
-  .podcast-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+
+  /* Carousel track */
+  .podcast-carousel-wrap {
+    position: relative;
+    overflow: hidden;
   }
-  .podcast-card {
-    background: var(--cream) !important;
-    border-radius: 16px;
-    padding: 32px 24px;
+  .podcast-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 20px 0 8px;
+    cursor: grab;
+    justify-content: center;
+  }
+  .podcast-carousel:active { cursor: grabbing; }
+  .podcast-carousel::-webkit-scrollbar { display: none; }
+
+  /* Cards */
+  .pc-card {
+    flex: 0 0 320px;
+    background: white !important;
+    border: 0.5px solid rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: left;
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    scroll-snap-align: center;
+    user-select: none;
   }
-  .podcast-card-ep {
-    font-size: 12px;
+  .pc-card--featured {
+    border: 2px solid #D85A30;
+  }
+
+  /* Top badges */
+  .pc-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .pc-badge--start {
+    background: #D85A30 !important;
+    color: white;
+  }
+  .pc-badge--bonus {
+    background: #f0eeeb !important;
+    color: #777;
+  }
+
+  /* Decorative episode number */
+  .pc-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.06);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .pc-card--featured .pc-num {
+    color: rgba(216,90,48,0.15);
+  }
+
+  /* Episode label */
+  .pc-ep {
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--coral);
-    margin-bottom: 12px;
+    color: #D85A30;
+    margin-bottom: 8px;
   }
-  .podcast-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
+  .pc-ep--bonus {
+    color: #999;
+  }
+
+  /* Title & description */
+  .pc-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
     color: var(--teal);
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     line-height: 1.35;
   }
-  .podcast-card-desc {
-    font-size: 15px;
-    color: var(--text);
+  .pc-desc {
+    font-size: 14px;
+    color: #777;
     line-height: 1.55;
     margin-bottom: 20px;
     flex-grow: 1;
   }
-  .podcast-card iframe {
-    width: 100%;
+
+  /* Live player row */
+  .pc-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fdf8f5 !important;
     border-radius: 8px;
+    padding: 10px 12px;
   }
-  .podcast-card-coming {
-    opacity: 0.55;
+  .pc-play-btn {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    background: #D85A30 !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s;
   }
-  .podcast-coming-badge {
-    display: inline-block;
-    background: var(--teal) !important;
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+  .pc-play-btn:hover { transform: scale(1.08); }
+  .pc-play-btn svg { fill: white; margin-left: 2px; }
+  .pc-player-info {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+  }
+  .pc-player-show {
+    font-size: 11px;
+    color: #999;
     text-transform: uppercase;
-    padding: 10px 24px;
-    border-radius: 50px;
-    margin-top: auto;
+    letter-spacing: 0.05em;
   }
+  .pc-player-title {
+    font-size: 13px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pc-player-dur {
+    flex: 0 0 auto;
+    font-size: 12px;
+    color: #999;
+  }
+
+  /* Coming soon block */
+  .pc-coming {
+    background: #f7f5f2 !important;
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .pc-coming-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .pc-coming-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #D85A30 !important;
+  }
+  .pc-coming-dot--muted {
+    background: #ccc !important;
+  }
+  .pc-coming-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .pc-coming-date {
+    font-size: 12px;
+    color: #999;
+  }
+
+  /* Dots + arrows */
+  .pc-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .pc-dots {
+    display: flex;
+    gap: 8px;
+  }
+  .pc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ddd !important;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .pc-dot--active {
+    background: #D85A30 !important;
+  }
+  .pc-arrow {
+    background: none;
+    border: 1.5px solid #ccc;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #999;
+    font-size: 16px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pc-arrow:hover { border-color: #D85A30; color: #D85A30; }
+
+  /* Footer note */
+  .pc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #aaa;
+    font-style: italic;
+  }
+  .pc-footer-line {
+    width: 48px;
+    height: 0;
+    border-top: 1px dashed #ccc;
+  }
+
   @media (max-width: 768px) {
-    .podcast-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .podcast { padding: 64px 24px; }
+    .podcast-carousel { justify-content: flex-start; padding-left: 4px; padding-right: 4px; }
+    .pc-card { flex: 0 0 290px; }
   }
 
   /* ─── BRIDGE ─── */
@@ -1605,30 +1795,156 @@
 <section class="podcast">
   <div class="podcast-inner">
     <div class="podcast-label">🎧 Listen: Ads Made Simple</div>
-    <h2>A 3-part podcast series that breaks it all down</h2>
+    <h2>A podcast series that breaks it all down</h2>
     <p class="podcast-intro">Hear exactly how simple Facebook &amp; Instagram ads work, why they&rsquo;re a game-changer for private practice, and how to get started.</p>
-    <div class="podcast-grid">
-      <div class="podcast-card">
-        <div class="podcast-card-ep">Episode 1</div>
-        <div class="podcast-card-title">Why Ads? Why Now?</div>
-        <div class="podcast-card-desc">The case for ditching the content hamster wheel and letting a simple ad do the heavy lifting.</div>
-        <iframe src="https://embed.acast.com/65d4445a7e29af00164868b8/69cd3a841ada36b7ad14ada1" frameborder="0" width="100%" height="190" allow="autoplay"></iframe>
-      </div>
-      <div class="podcast-card">
-        <div class="podcast-card-ep">Episode 2</div>
-        <div class="podcast-card-title">The $5/Day System</div>
-        <div class="podcast-card-desc">A look inside the automated funnel that turns a small daily budget into real leads and booked calls.</div>
-        <iframe src="https://embed.acast.com/65d4445a7e29af00164868b8/69ce83193a785fb94b7cd811" frameborder="0" width="100%" height="190" allow="autoplay"></iframe>
-      </div>
-      <div class="podcast-card podcast-card-coming">
-        <div class="podcast-card-ep">Episode 3</div>
-        <div class="podcast-card-title">Getting Started</div>
-        <div class="podcast-card-desc">Everything you need to launch your first campaign, step by step. No tech overwhelm, no jargon.</div>
-        <div class="podcast-coming-badge">Coming Wednesday</div>
-      </div>
+
+    <div class="podcast-carousel-wrap">
+      <div class="podcast-carousel" id="podCarousel">
+
+        <!-- Episode 1 — Featured -->
+        <div class="pc-card pc-card--featured" data-index="0">
+          <span class="pc-badge pc-badge--start">Start here</span>
+          <div class="pc-num">01</div>
+          <div class="pc-ep">Episode 1</div>
+          <div class="pc-title">Why Ads? Why Now?</div>
+          <div class="pc-desc">The case for ditching the content hamster wheel and letting a simple ad do the heavy lifting.</div>
+          <div class="pc-player">
+            <button class="pc-play-btn" onclick="this.closest('.pc-card').querySelector('.pc-acast-embed').style.display=this.closest('.pc-card').querySelector('.pc-acast-embed').style.display==='none'?'block':'none'"><svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16"/></svg></button>
+            <div class="pc-player-info">
+              <div class="pc-player-show">Ads Made Simple</div>
+              <div class="pc-player-title">Why Ads? Why Now?</div>
+            </div>
+            <div class="pc-player-dur">26 min</div>
+          </div>
+          <div class="pc-acast-embed" style="display:none;margin-top:12px;">
+            <iframe src="https://embed.acast.com/65d4445a7e29af00164868b8/69cd3a841ada36b7ad14ada1" frameborder="0" width="100%" height="190" allow="autoplay" style="border-radius:8px;"></iframe>
+          </div>
+        </div>
+
+        <!-- Episode 2 -->
+        <div class="pc-card" data-index="1">
+          <div class="pc-num">02</div>
+          <div class="pc-ep">Episode 2</div>
+          <div class="pc-title">The $5/Day System</div>
+          <div class="pc-desc">A look inside the automated funnel that turns a small daily budget into real leads and booked calls.</div>
+          <div class="pc-player">
+            <button class="pc-play-btn" onclick="this.closest('.pc-card').querySelector('.pc-acast-embed').style.display=this.closest('.pc-card').querySelector('.pc-acast-embed').style.display==='none'?'block':'none'"><svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16"/></svg></button>
+            <div class="pc-player-info">
+              <div class="pc-player-show">Ads Made Simple</div>
+              <div class="pc-player-title">The $5/Day System</div>
+            </div>
+            <div class="pc-player-dur">25 min</div>
+          </div>
+          <div class="pc-acast-embed" style="display:none;margin-top:12px;">
+            <iframe src="https://embed.acast.com/65d4445a7e29af00164868b8/69ce83193a785fb94b7cd811" frameborder="0" width="100%" height="190" allow="autoplay" style="border-radius:8px;"></iframe>
+          </div>
+        </div>
+
+        <!-- Episode 3 — Coming soon -->
+        <div class="pc-card" data-index="2">
+          <div class="pc-num">03</div>
+          <div class="pc-ep">Episode 3</div>
+          <div class="pc-title">Getting Started</div>
+          <div class="pc-desc">Everything you need to launch your first campaign, step by step. No tech overwhelm, no jargon.</div>
+          <div class="pc-coming">
+            <div class="pc-coming-row">
+              <span class="pc-coming-dot"></span>
+              <span class="pc-coming-label">Dropping Wednesday</span>
+            </div>
+            <div class="pc-coming-date">April 9</div>
+          </div>
+        </div>
+
+        <!-- Episode 4 — Bonus -->
+        <div class="pc-card" data-index="3">
+          <span class="pc-badge pc-badge--bonus">Bonus episode</span>
+          <div class="pc-num">04</div>
+          <div class="pc-ep pc-ep--bonus">Bonus</div>
+          <div class="pc-title">FAQ</div>
+          <div class="pc-desc">Your biggest questions about running ads answered &mdash; straight from the community.</div>
+          <div class="pc-coming">
+            <div class="pc-coming-row">
+              <span class="pc-coming-dot pc-coming-dot--muted"></span>
+              <span class="pc-coming-label">Dropping Sunday</span>
+            </div>
+            <div class="pc-coming-date">April 13</div>
+          </div>
+        </div>
+
+      </div><!-- /carousel -->
     </div>
+
+    <!-- Controls -->
+    <div class="pc-controls">
+      <button class="pc-arrow" id="podPrev" aria-label="Previous">&#8592;</button>
+      <div class="pc-dots" id="podDots">
+        <button class="pc-dot pc-dot--active" data-i="0" aria-label="Episode 1"></button>
+        <button class="pc-dot" data-i="1" aria-label="Episode 2"></button>
+        <button class="pc-dot" data-i="2" aria-label="Episode 3"></button>
+        <button class="pc-dot" data-i="3" aria-label="Episode 4"></button>
+      </div>
+      <button class="pc-arrow" id="podNext" aria-label="Next">&#8594;</button>
+    </div>
+
+    <div class="pc-footer">
+      <span class="pc-footer-line"></span>
+      listen in order for best results
+      <span class="pc-footer-line"></span>
+    </div>
+
   </div>
 </section>
+
+<script>
+(function(){
+  const carousel = document.getElementById('podCarousel');
+  const dots = document.querySelectorAll('#podDots .pc-dot');
+  const cards = carousel.querySelectorAll('.pc-card');
+  const prevBtn = document.getElementById('podPrev');
+  const nextBtn = document.getElementById('podNext');
+  let current = 0;
+
+  function scrollTo(i) {
+    i = Math.max(0, Math.min(i, cards.length - 1));
+    cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    current = i;
+    dots.forEach((d, idx) => d.classList.toggle('pc-dot--active', idx === i));
+  }
+
+  dots.forEach(d => d.addEventListener('click', () => scrollTo(+d.dataset.i)));
+  prevBtn.addEventListener('click', () => scrollTo(current - 1));
+  nextBtn.addEventListener('click', () => scrollTo(current + 1));
+
+  // Update dots on manual scroll
+  let scrollTimer;
+  carousel.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const scrollLeft = carousel.scrollLeft;
+      const center = scrollLeft + carousel.offsetWidth / 2;
+      let closest = 0, minDist = Infinity;
+      cards.forEach((c, i) => {
+        const cardCenter = c.offsetLeft + c.offsetWidth / 2;
+        const dist = Math.abs(center - cardCenter);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      current = closest;
+      dots.forEach((d, idx) => d.classList.toggle('pc-dot--active', idx === closest));
+    }, 80);
+  });
+
+  // Click-and-drag
+  let isDown = false, startX, scrollStart;
+  carousel.addEventListener('mousedown', e => { isDown = true; startX = e.pageX; scrollStart = carousel.scrollLeft; });
+  carousel.addEventListener('mouseleave', () => isDown = false);
+  carousel.addEventListener('mouseup', () => isDown = false);
+  carousel.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    carousel.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+})();
+</script>
 
 <!-- BRIDGE -->
 <section class="bridge">
