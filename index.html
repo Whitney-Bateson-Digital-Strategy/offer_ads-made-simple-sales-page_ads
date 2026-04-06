@@ -590,6 +590,81 @@
     text-align: center;
   }
 
+  /* ─── PODCAST ─── */
+  .podcast {
+    background: white !important;
+    padding: 96px 48px;
+  }
+  .podcast-inner { max-width: 960px; margin: 0 auto; text-align: center; }
+  .podcast-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+  .podcast h2 { font-size: clamp(28px, 3vw, 40px); margin-bottom: 12px; }
+  .podcast-intro { font-size: 18px; color: var(--text); line-height: 1.6; margin-bottom: 48px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .podcast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .podcast-card {
+    background: var(--cream) !important;
+    border-radius: 16px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .podcast-card-ep {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 12px;
+  }
+  .podcast-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--teal);
+    margin-bottom: 16px;
+    line-height: 1.35;
+  }
+  .podcast-card-desc {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  .podcast-card iframe {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .podcast-card-coming {
+    opacity: 0.55;
+  }
+  .podcast-coming-badge {
+    display: inline-block;
+    background: var(--teal) !important;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 50px;
+    margin-top: auto;
+  }
+  @media (max-width: 768px) {
+    .podcast-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  }
+
   /* ─── BRIDGE ─── */
   .bridge {
     background: var(--cream) !important;
@@ -1522,6 +1597,35 @@
     <div class="pain-bottom">
       <div class="sticker-wrap"><span class="sticker">there&rsquo;s a better way &#10024;</span></div>
       <div style="margin-top:16px;">It&rsquo;s not that you&rsquo;re bad at marketing. You just haven&rsquo;t had a system running in the background doing this work <em>for</em> you. One you set up once, turn on, and let run, bringing in new leads and booking calls while you&rsquo;re with clients, on a walk, or completely offline. <strong>That&rsquo;s what we&rsquo;re building together.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- PODCAST -->
+<section class="podcast">
+  <div class="podcast-inner">
+    <div class="podcast-label">🎧 Listen: Ads Made Simple</div>
+    <h2>A 3-part podcast series that breaks it all down</h2>
+    <p class="podcast-intro">Hear exactly how simple Facebook &amp; Instagram ads work, why they&rsquo;re a game-changer for private practice, and how to get started.</p>
+    <div class="podcast-grid">
+      <div class="podcast-card">
+        <div class="podcast-card-ep">Episode 1</div>
+        <div class="podcast-card-title">Why Ads? Why Now?</div>
+        <div class="podcast-card-desc">The case for ditching the content hamster wheel and letting a simple ad do the heavy lifting.</div>
+        <iframe src="https://embed.acast.com/65d4445a7e29af00164868b8/69cd3a841ada36b7ad14ada1" frameborder="0" width="100%" height="190" allow="autoplay"></iframe>
+      </div>
+      <div class="podcast-card">
+        <div class="podcast-card-ep">Episode 2</div>
+        <div class="podcast-card-title">The $5/Day System</div>
+        <div class="podcast-card-desc">A look inside the automated funnel that turns a small daily budget into real leads and booked calls.</div>
+        <iframe src="https://embed.acast.com/65d4445a7e29af00164868b8/69ce83193a785fb94b7cd811" frameborder="0" width="100%" height="190" allow="autoplay"></iframe>
+      </div>
+      <div class="podcast-card podcast-card-coming">
+        <div class="podcast-card-ep">Episode 3</div>
+        <div class="podcast-card-title">Getting Started</div>
+        <div class="podcast-card-desc">Everything you need to launch your first campaign, step by step. No tech overwhelm, no jargon.</div>
+        <div class="podcast-coming-badge">Coming Wednesday</div>
+      </div>
     </div>
   </div>
 </section>
