@@ -619,9 +619,8 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding: 20px 0 8px;
+    padding: 20px calc(50% - 160px) 8px;
     cursor: grab;
-    justify-content: center;
   }
   .podcast-carousel:active { cursor: grabbing; }
   .podcast-carousel::-webkit-scrollbar { display: none; }
@@ -851,57 +850,116 @@
 
   @media (max-width: 768px) {
     .podcast { padding: 64px 24px; }
-    .podcast-carousel { justify-content: flex-start; padding-left: 4px; padding-right: 4px; }
+    .podcast-carousel { padding-left: calc(50% - 145px); padding-right: calc(50% - 145px); }
     .pc-card { flex: 0 0 290px; }
   }
 
   /* ─── BRIDGE ─── */
   .bridge {
-    background: var(--cream) !important;
+    background: white !important;
     padding: 100px 48px;
     position: relative;
-    overflow: hidden;
-  }
-  .bridge::before {
-    content: '';
-    position: absolute;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(174,211,221,0.3) 0%, transparent 70%) !important;
-    top: -100px; right: -100px;
-    border-radius: 50%;
   }
   .bridge-inner { max-width: 720px; margin: 0 auto; text-align: center; position: relative; }
-  .bridge h2 { font-size: clamp(30px, 3vw, 42px); margin-bottom: 32px; }
-  .bridge h2 .price-highlight { color: var(--coral); }
-  .bridge p { font-size: 18px; line-height: 1.75; color: var(--text); margin-bottom: 20px; }
-  .price-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--teal) !important;
-    color: white;
-    border-radius: 50px;
-    padding: 16px 32px;
-    margin: 32px 0;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+  .bridge h2 { font-size: clamp(30px, 3.5vw, 46px); margin-bottom: 32px; line-height: 1.2; }
+  .bridge h2 .price-highlight {
+    color: #D85A30;
+    position: relative;
+    white-space: nowrap;
   }
-  .price-badge .price-amount {
+  .bridge h2 .price-highlight::before {
+    content: '';
+    position: absolute;
+    inset: -6px -12px;
+    border: 2.5px solid #D85A30;
+    border-radius: 50%;
+    transform: rotate(-2deg);
+  }
+  .bridge p { font-size: 18px; line-height: 1.75; color: var(--text); margin-bottom: 20px; }
+
+  /* Stat strip */
+  .bridge-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    gap: 0;
+  }
+  .bridge-stat {
+    flex: 1;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .bridge-stat + .bridge-stat {
+    border-left: 1px solid #ddd;
+  }
+  .bridge-stat-num {
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    color: var(--lime);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    color: #D85A30;
+    line-height: 1.1;
+  }
+  .bridge-stat-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 6px;
+  }
+
+  /* Pull quote (minimal) */
+  .bridge-divider {
+    width: 40px;
+    height: 3px;
+    background: #D85A30 !important;
+    margin: 40px auto 28px;
+    border: none;
   }
   .pull-quote {
-    background: var(--teal) !important;
-    color: white;
-    border-radius: 16px;
-    padding: 28px 40px;
-    margin: 36px 0;
     font-family: 'Playfair Display', serif;
-    font-size: 26px;
+    font-size: clamp(22px, 2.8vw, 30px);
     font-style: italic;
+    color: var(--teal);
+    line-height: 1.45;
+    margin-bottom: 40px;
+  }
+
+  /* Horizontal rule */
+  .bridge-hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 40px 0;
+  }
+
+  /* Big idea (left-aligned) */
+  .bridge-idea {
+    text-align: left;
+  }
+  .bridge-idea-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #D85A30;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .bridge-idea-label::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 2.5px;
+    background: #D85A30 !important;
+  }
+  .bridge-idea p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 0;
   }
   .bridge-label {
     font-size: 13px;
@@ -1906,7 +1964,9 @@
 
   function scrollTo(i) {
     i = Math.max(0, Math.min(i, cards.length - 1));
-    cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    const card = cards[i];
+    const scrollTarget = card.offsetLeft - (carousel.offsetWidth / 2) + (card.offsetWidth / 2);
+    carousel.scrollTo({ left: scrollTarget, behavior: 'smooth' });
     current = i;
     dots.forEach((d, idx) => d.classList.toggle('pc-dot--active', idx === i));
   }
@@ -1949,13 +2009,31 @@
 <!-- BRIDGE -->
 <section class="bridge">
   <div class="bridge-inner">
-    <h2>What if <span class="price-highlight">$5/day</span> could bring in new leads and discovery calls &ndash; without you lifting a finger?</h2>
+    <h2>What if <span class="price-highlight">$5/day</span> could bring in new leads and discovery calls &mdash; without you lifting a finger?</h2>
     <p>You wake up tomorrow, check your inbox, and see new inquiries from people who found you overnight. They grabbed your free resource, got on your list, and are already warming up to work with you.</p>
-    <div class="price-badge">&#9749; Less than a latte. <span class="price-amount">$5/day.</span> Running 24/7.</div>
-    <div class="pull-quote">&ldquo;Next day? More leads. Day after? A discovery call booked.&rdquo;</div>
-    <p>Not because you stayed up late writing a carousel. Not because you went viral. <strong>Because a simple $5/day ad was quietly doing it for you, around the clock.</strong></p>
-    <div class="gold-callout">
-      <div class="gold-callout-label">&#10022; The big idea</div>
+
+    <div class="bridge-stats">
+      <div class="bridge-stat">
+        <div class="bridge-stat-num">$5/day</div>
+        <div class="bridge-stat-label">Less than a latte</div>
+      </div>
+      <div class="bridge-stat">
+        <div class="bridge-stat-num">24/7</div>
+        <div class="bridge-stat-label">Running while you sleep</div>
+      </div>
+      <div class="bridge-stat">
+        <div class="bridge-stat-num">1&times;</div>
+        <div class="bridge-stat-label">Set it up once</div>
+      </div>
+    </div>
+
+    <div class="bridge-divider"></div>
+    <div class="pull-quote">&ldquo;Next day? More leads.<br>Day after? A discovery call booked.&rdquo;</div>
+
+    <hr class="bridge-hr">
+
+    <div class="bridge-idea">
+      <div class="bridge-idea-label">The big idea</div>
       <p>Most marketing asks you to <em>show up</em>. This system asks you to <em>set it up</em>. One time. Then it runs in the background 24/7, bringing in new leads and moving them toward booking a call or joining your programs. No posting schedule required.</p>
     </div>
   </div>
