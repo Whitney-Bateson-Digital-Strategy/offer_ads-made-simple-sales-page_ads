@@ -1823,6 +1823,51 @@
   }
   footer a { color: rgba(255,255,255,0.5); }
 
+  /* ─── FLOATING CALCULATOR BUTTON ─── */
+  .calc-float {
+    position: fixed;
+    bottom: 28px;
+    left: 28px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--teal) !important;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 50px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(2,82,93,0.35);
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    border: none;
+  }
+  .calc-float.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .calc-float:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(2,82,93,0.45);
+  }
+  .calc-float-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+  @media (max-width: 768px) {
+    .calc-float {
+      bottom: 20px;
+      left: 20px;
+      padding: 12px 18px;
+      font-size: 13px;
+    }
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
     nav { padding: 14px 24px; }
@@ -2139,7 +2184,7 @@
 </section>
 
 <!-- CALCULATOR -->
-<section class="calculator">
+<section class="calculator" id="calculator">
   <div class="calculator-inner">
     <h2>What could $5/day actually do for you?</h2>
     <p class="calculator-sub">Move the sliders and see your numbers.</p>
@@ -2766,6 +2811,41 @@ window.addEventListener('load', function() {
   widgetCode.src = 'https://app.charla.com/widget/widget.js';
   document.body.appendChild(widgetCode);
 });
+</script>
+<!-- FLOATING CALCULATOR BUTTON -->
+<a href="#calculator" class="calc-float" id="calcFloat">
+  <span class="calc-float-icon">🧮</span>
+  <span>See your ROI</span>
+</a>
+
+<script>
+(function(){
+  const btn = document.getElementById('calcFloat');
+  const calc = document.getElementById('calculator');
+  const hero = document.querySelector('.hero');
+  if (!btn || !calc || !hero) return;
+
+  function update() {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const calcRect = calc.getBoundingClientRect();
+    const nearCalc = calcRect.top < window.innerHeight && calcRect.bottom > 0;
+    const pastHero = heroBottom < 0;
+
+    if (pastHero && !nearCalc) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    calc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
 </script>
 </body>
 </html>
