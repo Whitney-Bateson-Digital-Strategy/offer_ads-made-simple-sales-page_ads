@@ -593,39 +593,37 @@
   /* ─── TRANSITION ─── */
   .transition-section {
     background: white !important;
-    padding: 80px 48px;
+    padding: 4rem 48px 0;
   }
   .transition-inner {
-    max-width: 600px;
+    max-width: 640px;
     margin: 0 auto;
     text-align: center;
   }
-  .transition-divider {
-    width: 48px;
-    height: 3px;
-    background: var(--coral) !important;
-    margin: 0 auto 36px;
-    border-radius: 2px;
-  }
   .transition-body {
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.8;
-    color: #777;
+    color: #888;
     margin: 0 0 16px;
+    font-style: normal;
   }
-  .transition-punchline {
+  .transition-headline {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 3vw, 30px);
-    font-weight: 600;
-    line-height: 1.4;
+    font-size: clamp(32px, 4vw, 42px);
+    font-weight: 400;
+    line-height: 1.3;
     color: var(--teal);
-    margin: 28px 0 36px;
+    margin: 32px 0 36px;
+  }
+  .transition-headline em {
+    font-style: italic;
+    color: #D85A30;
   }
   .transition-cta {
     display: inline-block;
-    background: var(--coral) !important;
+    background: #D85A30 !important;
     color: white;
-    padding: 16px 32px;
+    padding: 14px 32px;
     border-radius: 40px;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
@@ -637,6 +635,72 @@
   .transition-cta:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(216,90,48,0.3);
+  }
+
+  /* ─── PHOTO BAND ─── */
+  .photo-band {
+    position: relative;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .photo-band-img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .photo-band-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-band-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #2C2422;
+    opacity: 0.7;
+  }
+  .photo-band-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    text-align: center;
+    padding: 72px 48px;
+  }
+  .photo-band-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
+  }
+  .photo-band-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3.2vw, 34px);
+    font-weight: 400;
+    color: white;
+    line-height: 1.45;
+    margin-bottom: 28px;
+  }
+  .photo-band-quote em {
+    font-style: italic;
+    color: #F0997B;
+  }
+  .photo-band-rule {
+    width: 32px;
+    height: 1.5px;
+    background: #D85A30 !important;
+    border: none;
+    margin: 0 auto 20px;
+  }
+  .photo-band-attr {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
   }
 
   /* ─── PODCAST ─── */
@@ -903,7 +967,7 @@
     .pc-card { flex: 0 0 290px; }
   }
 
-  /* ─── BRIDGE ─── */
+  /* ─── BRIDGE ($5/day) ─── */
   .bridge {
     background: var(--cream) !important;
     padding: 100px 48px;
@@ -930,7 +994,7 @@
   .bridge-stats {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 40px 0;
     gap: 0;
   }
@@ -940,46 +1004,39 @@
     padding: 0 24px;
   }
   .bridge-stat + .bridge-stat {
-    border-left: 1px solid #ddd;
+    border-left: 1px solid #D3D1C7;
   }
   .bridge-stat-num {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 44px);
-    font-weight: 700;
+    font-size: 44px;
+    font-weight: 400;
     color: #D85A30;
     line-height: 1.1;
   }
   .bridge-stat-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #888;
-    margin-top: 6px;
+    color: #999;
+    margin-top: 8px;
+    line-height: 1.4;
   }
 
-  /* Pull quote (minimal) */
-  .bridge-divider {
-    width: 40px;
-    height: 3px;
-    background: #D85A30 !important;
-    margin: 40px auto 28px;
-    border: none;
+  /* Pull quote zone */
+  .pull-quote-zone {
+    border-top: 0.5px solid #D3D1C7;
+    border-bottom: 0.5px solid #D3D1C7;
+    padding: 2.5rem 0;
+    margin: 40px 0 3rem;
   }
   .pull-quote {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 2.8vw, 30px);
+    font-size: clamp(24px, 3vw, 28px);
     font-style: italic;
     color: var(--teal);
     line-height: 1.45;
-    margin-bottom: 40px;
-  }
-
-  /* Horizontal rule */
-  .bridge-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 40px 0;
+    margin: 0;
   }
 
   /* Big idea (left-aligned) */
@@ -1009,14 +1066,6 @@
     line-height: 1.75;
     color: var(--text);
     margin: 0;
-  }
-  .bridge-label {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-top: 40px;
   }
 
   /* ─── CLIENT ENGINE ─── */
@@ -1897,14 +1946,27 @@
 <!-- TRANSITION -->
 <section class="transition-section">
   <div class="transition-inner">
-    <div class="transition-divider"></div>
     <p class="transition-body">It&rsquo;s not that you&rsquo;re bad at marketing. You just haven&rsquo;t had a system working in the background for you.</p>
     <p class="transition-body">You can keep showing up and hoping the algorithm cooperates &mdash; or you can put something simple to work that runs while you&rsquo;re with clients, at dinner, or completely offline.</p>
-    <p class="transition-punchline">There&rsquo;s a better way.<br>And it costs less than your morning coffee.</p>
+    <h3 class="transition-headline">Stop feeding the algorithm.<br>Start running <em>a system.</em></h3>
+    <a href="#pricing" class="transition-cta">I want this for my practice &#8594;</a>
   </div>
 </section>
 
-<!-- BRIDGE -->
+<!-- PHOTO BAND -->
+<section class="photo-band">
+  <div class="photo-band-img">
+    <img src="https://whitneybateson.com/wp-content/uploads/2025/12/windows-2EwyKv4-03k-unsplash-scaled.jpg" alt="Whitney Bateson" loading="lazy">
+  </div>
+  <div class="photo-band-content">
+    <div class="photo-band-eyebrow">From Whitney</div>
+    <div class="photo-band-quote">&ldquo;I built this for practitioners who are incredible at their work &mdash; and <em>exhausted</em> by the business of it.&rdquo;</div>
+    <div class="photo-band-rule"></div>
+    <div class="photo-band-attr">&mdash; Whitney Bateson, Digital Strategist</div>
+  </div>
+</section>
+
+<!-- $5/DAY BRIDGE -->
 <section class="bridge">
   <div class="bridge-inner">
     <h2>What if <span class="price-highlight">$5/day</span> could bring in new leads and discovery calls &mdash; without you lifting a finger?</h2>
@@ -1912,23 +1974,22 @@
 
     <div class="bridge-stats">
       <div class="bridge-stat">
-        <div class="bridge-stat-num">$5/day</div>
-        <div class="bridge-stat-label">Less than a latte</div>
+        <div class="bridge-stat-num">$5</div>
+        <div class="bridge-stat-label">Per day<br>Less than a latte</div>
       </div>
       <div class="bridge-stat">
         <div class="bridge-stat-num">24/7</div>
-        <div class="bridge-stat-label">Running while you sleep</div>
+        <div class="bridge-stat-label">Running while<br>you sleep</div>
       </div>
       <div class="bridge-stat">
         <div class="bridge-stat-num">1&times;</div>
-        <div class="bridge-stat-label">Set it up once</div>
+        <div class="bridge-stat-label">Set it up<br>once</div>
       </div>
     </div>
 
-    <div class="bridge-divider"></div>
-    <div class="pull-quote">&ldquo;Next day? More leads.<br>Day after? A discovery call booked.&rdquo;</div>
-
-    <hr class="bridge-hr">
+    <div class="pull-quote-zone">
+      <div class="pull-quote">&ldquo;Next day? More leads.<br>Day after? A discovery call booked.&rdquo;</div>
+    </div>
 
     <div class="bridge-idea">
       <div class="bridge-idea-label">The big idea</div>
