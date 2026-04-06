@@ -619,9 +619,8 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding: 20px 0 8px;
+    padding: 20px calc(50% - 160px) 8px;
     cursor: grab;
-    justify-content: center;
   }
   .podcast-carousel:active { cursor: grabbing; }
   .podcast-carousel::-webkit-scrollbar { display: none; }
@@ -851,7 +850,7 @@
 
   @media (max-width: 768px) {
     .podcast { padding: 64px 24px; }
-    .podcast-carousel { justify-content: flex-start; padding-left: 4px; padding-right: 4px; }
+    .podcast-carousel { padding-left: calc(50% - 145px); padding-right: calc(50% - 145px); }
     .pc-card { flex: 0 0 290px; }
   }
 
@@ -1906,7 +1905,9 @@
 
   function scrollTo(i) {
     i = Math.max(0, Math.min(i, cards.length - 1));
-    cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    const card = cards[i];
+    const scrollTarget = card.offsetLeft - (carousel.offsetWidth / 2) + (card.offsetWidth / 2);
+    carousel.scrollTo({ left: scrollTarget, behavior: 'smooth' });
     current = i;
     dots.forEach((d, idx) => d.classList.toggle('pc-dot--active', idx === i));
   }
