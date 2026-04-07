@@ -620,11 +620,11 @@
   }
   .transition-headline em {
     font-style: italic;
-    color: #D85A30;
+    color: var(--coral);
   }
   .transition-cta {
     display: inline-block;
-    background: #D85A30 !important;
+    background: var(--coral) !important;
     color: white;
     padding: 14px 32px;
     border-radius: 40px;
@@ -637,7 +637,7 @@
   }
   .transition-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(216,90,48,0.3);
+    box-shadow: 0 8px 24px rgba(255,127,80,0.3);
   }
 
   /* ─── PHOTO BAND ─── */
@@ -664,7 +664,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: #2C2422;
+    background: var(--teal);
     opacity: 0.7;
   }
   .photo-band-content {
@@ -692,12 +692,12 @@
   }
   .photo-band-quote em {
     font-style: italic;
-    color: #F0997B;
+    color: var(--peach);
   }
   .photo-band-rule {
     width: 32px;
     height: 1.5px;
-    background: #D85A30 !important;
+    background: var(--coral) !important;
     border: none;
     margin: 0 auto 20px;
   }
@@ -756,7 +756,7 @@
     user-select: none;
   }
   .pc-card--featured {
-    border: 2px solid #D85A30;
+    border: 2px solid var(--coral);
   }
 
   /* Top badges */
@@ -774,11 +774,11 @@
     white-space: nowrap;
   }
   .pc-badge--start {
-    background: #D85A30 !important;
+    background: var(--coral) !important;
     color: white;
   }
   .pc-badge--bonus {
-    background: #f0eeeb !important;
+    background: var(--cream) !important;
     color: #777;
   }
 
@@ -792,7 +792,7 @@
     margin-bottom: 2px;
   }
   .pc-card--featured .pc-num {
-    color: rgba(216,90,48,0.15);
+    color: rgba(255,127,80,0.15);
   }
 
   /* Episode label */
@@ -801,7 +801,7 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #D85A30;
+    color: var(--coral);
     margin-bottom: 8px;
   }
   .pc-ep--bonus {
@@ -830,7 +830,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #fdf8f5 !important;
+    background: var(--cream) !important;
     border-radius: 8px;
     padding: 10px 12px;
   }
@@ -838,7 +838,7 @@
     flex: 0 0 36px;
     width: 36px;
     height: 36px;
-    background: #D85A30 !important;
+    background: var(--coral) !important;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -875,7 +875,7 @@
 
   /* Coming soon block */
   .pc-coming {
-    background: #f7f5f2 !important;
+    background: var(--cream) !important;
     border-radius: 8px;
     padding: 14px 16px;
     text-align: center;
@@ -891,7 +891,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #D85A30 !important;
+    background: var(--coral) !important;
   }
   .pc-coming-dot--muted {
     background: #ccc !important;
@@ -929,7 +929,7 @@
     transition: background 0.2s;
   }
   .pc-dot--active {
-    background: #D85A30 !important;
+    background: var(--coral) !important;
   }
   .pc-arrow {
     background: none;
@@ -945,7 +945,7 @@
     font-size: 16px;
     transition: border-color 0.2s, color 0.2s;
   }
-  .pc-arrow:hover { border-color: #D85A30; color: #D85A30; }
+  .pc-arrow:hover { border-color: var(--coral); color: var(--coral); }
 
   /* Footer note */
   .pc-footer {
@@ -979,7 +979,7 @@
   .bridge-inner { max-width: 720px; margin: 0 auto; text-align: center; position: relative; }
   .bridge h2 { font-size: clamp(30px, 3.5vw, 46px); margin-bottom: 32px; line-height: 1.2; }
   .bridge h2 .price-highlight {
-    color: #D85A30;
+    color: var(--coral);
     position: relative;
     white-space: nowrap;
   }
@@ -987,7 +987,7 @@
     content: '';
     position: absolute;
     inset: -6px -12px;
-    border: 2.5px solid #D85A30;
+    border: 2.5px solid var(--coral);
     border-radius: 50%;
     transform: rotate(-2deg);
   }
@@ -1013,7 +1013,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 44px;
     font-weight: 400;
-    color: #D85A30;
+    color: var(--coral);
     line-height: 1.1;
   }
   .bridge-stat-label {
@@ -1051,7 +1051,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #D85A30;
+    color: var(--coral);
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -1062,7 +1062,7 @@
     display: inline-block;
     width: 16px;
     height: 2.5px;
-    background: #D85A30 !important;
+    background: var(--coral) !important;
   }
   .bridge-idea p {
     font-size: 17px;
