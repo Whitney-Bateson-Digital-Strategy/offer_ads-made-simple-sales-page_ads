@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ads Made Simple — Member Access</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --off-white:   #efeae3;
+      --pink:        #ffcdcd;
+      --orange:      #ff7f50;
+      --orange-dark: #e5673a;
+      --yellow:      #e3f696;
+      --blue-light:  #aed3dd;
+      --teal:        #02525d;
+      --teal-dark:   #013d46;
+      --ink:         #012830;
+      --muted:       #5a8a94;
+      --border:      rgba(174, 211, 221, 0.25);
+      --error-bg:    #fff0ee;
+      --error-text:  #c0392b;
+      --error-border:#f5c6bc;
+    }
+
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background-color: var(--teal);
+      color: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bg-glow-1 {
+      position: fixed;
+      top: -160px; right: -160px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(174,211,221,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .bg-glow-2 {
+      position: fixed;
+      bottom: -140px; left: -140px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(255,127,80,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .deco-ring-1 {
+      position: fixed;
+      top: -80px; left: -80px;
+      width: 300px; height: 300px;
+      border: 1px solid rgba(174,211,221,0.18);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .deco-ring-2 {
+      position: fixed;
+      bottom: -100px; right: -100px;
+      width: 360px; height: 360px;
+      border: 1px solid rgba(255,205,205,0.12);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .deco-dot {
+      position: fixed;
+      top: 2rem; right: 2.5rem;
+      width: 9px; height: 9px;
+      background: var(--orange);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+    .deco-dot-2 {
+      position: fixed;
+      bottom: 2.5rem; left: 2rem;
+      width: 6px; height: 6px;
+      background: var(--yellow);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .card {
+      background: var(--off-white);
+      color: var(--ink);
+      border-radius: 4px;
+      padding: 3.5rem 3rem 3rem;
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      box-shadow:
+        0 2px 8px rgba(1, 40, 48, 0.2),
+        0 24px 64px rgba(1, 40, 48, 0.28);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), #ffaa80, var(--orange));
+      border-radius: 4px 4px 0 0;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      opacity: 0.75;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 1.75rem 0;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(2, 82, 93, 0.12);
+    }
+    .divider-dot {
+      width: 5px; height: 5px;
+      background: var(--orange);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    .field { margin-bottom: 1.2rem; }
+
+    label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.45rem;
+      opacity: 0.8;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid rgba(2, 82, 93, 0.15);
+      border-radius: 3px;
+      background: #fff;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--ink);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input::placeholder { color: #b8c8cb; }
+
+    input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(2, 82, 93, 0.1);
+    }
+
+    .hint {
+      font-size: 0.73rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    .error-msg {
+      display: none;
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      border-radius: 3px;
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      color: var(--error-text);
+      margin-bottom: 1.2rem;
+    }
+    .error-msg.visible {
+      display: block;
+      animation: shake 0.35s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-7px); }
+      60%       { transform: translateX(7px); }
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: var(--teal);
+      color: var(--off-white);
+      border: none;
+      border-radius: 3px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background: var(--teal-dark);
+      box-shadow: 0 4px 16px rgba(1, 40, 48, 0.2);
+    }
+    button:active { transform: scale(0.99); }
+    button.loading {
+      background: #7aacb4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 1.75rem;
+      line-height: 1.7;
+    }
+    .footer-note a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(2, 82, 93, 0.25);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+    .footer-note a:hover {
+      border-color: var(--orange);
+      color: var(--orange-dark);
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 2.75rem 1.75rem 2.25rem; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+  <div class="deco-ring-1"></div>
+  <div class="deco-ring-2"></div>
+  <div class="deco-dot"></div>
+  <div class="deco-dot-2"></div>
+
+  <div class="card">
+    <div class="card-header">
+      <p class="eyebrow">Whitney Bateson Digital</p>
+      <h1>Ads Made <em>Simple</em></h1>
+      <p class="subtitle">Member access only. Sign in with the email address you used to purchase and your last name.</p>
+    </div>
+
+    <div class="divider"><div class="divider-dot"></div></div>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <div class="field">
+      <label for="emailInput">Email Address</label>
+      <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email" />
+    </div>
+
+    <div class="field">
+      <label for="lastNameInput">Last Name</label>
+      <input type="text" id="lastNameInput" placeholder="Smith" autocomplete="family-name" />
+      <p class="hint">Enter your last name exactly as it appears on your purchase.</p>
+    </div>
+
+    <button id="accessBtn" onclick="checkAccess()">Access My Course →</button>
+
+    <p class="footer-note">
+      This course is licensed for your personal use only.<br/>
+      Need help? <a href="mailto:admin@whitneybateson.com">admin@whitneybateson.com</a>
+    </p>
+  </div>
+
+  <script>
+    const SUPABASE_URL  = "https://rguqefwhlzehpzgljbdo.supabase.co";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJndXFlZndobHplaHB6Z2xqYmRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNzYyMjYsImV4cCI6MjA4OTk1MjIyNn0.N8-BWjyTFMpdoTbKBik8jQdyA7YCPiq7nT_HdfxcMZ8";
+    const NOTION_URL    = "https://www.notion.so/Ads-Made-Simple-33b0d99c2895802e9241c56f4eaa445c";
+    const STUDENTS_TABLE = "students_ads_made_simple";
+    const LOGS_TABLE     = "login_logs_ads_made_simple";
+
+    async function logLogin(email) {
+      // Fire-and-forget — we don't block the redirect on this
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/${LOGS_TABLE}`, {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_ANON,
+            "Authorization": `Bearer ${SUPABASE_ANON}`,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({ email: email })
+        });
+      } catch (e) {
+        // Silently fail — logging should never block access
+      }
+    }
+
+    async function checkAccess() {
+      const email    = document.getElementById('emailInput').value.trim().toLowerCase();
+      const lastName = document.getElementById('lastNameInput').value.trim().toLowerCase();
+      const errorMsg = document.getElementById('errorMsg');
+      const btn      = document.getElementById('accessBtn');
+
+      errorMsg.classList.remove('visible');
+
+      if (!email || !lastName) {
+        errorMsg.textContent = '⚠ Please enter both your email address and last name.';
+        errorMsg.classList.add('visible');
+        return;
+      }
+
+      btn.textContent = 'Checking...';
+      btn.classList.add('loading');
+
+      try {
+        // Step 1: Check credentials against students table
+        const url = `${SUPABASE_URL}/rest/v1/${STUDENTS_TABLE}?email=eq.${encodeURIComponent(email)}&last_name=eq.${encodeURIComponent(lastName)}&select=email`;
+
+        const res  = await fetch(url, {
+          headers: {
+            "apikey": SUPABASE_ANON,
+            "Authorization": `Bearer ${SUPABASE_ANON}`,
+            "Content-Type": "application/json"
+          }
+        });
+
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+          // Step 2: Log the successful login (non-blocking)
+          logLogin(email);
+
+          // Step 3: Redirect
+          btn.textContent = 'Welcome! Redirecting...';
+          setTimeout(() => {
+            window.location.href = NOTION_URL;
+          }, 700);
+
+        } else {
+          errorMsg.textContent = "⚠ We didn't recognize those credentials. Please double-check your email address and last name.";
+          errorMsg.classList.add('visible');
+          btn.textContent = 'Access My Course →';
+          btn.classList.remove('loading');
+        }
+
+      } catch (err) {
+        errorMsg.textContent = '⚠ Something went wrong. Please try again in a moment.';
+        errorMsg.classList.add('visible');
+        btn.textContent = 'Access My Course →';
+        btn.classList.remove('loading');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkAccess();
+    });
+  </script>
+
+</body>
+</html>
