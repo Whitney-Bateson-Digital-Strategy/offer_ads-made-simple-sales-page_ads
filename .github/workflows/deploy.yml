@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./
-          server-dir: /offers.whitneybateson.com/public_html/ads-made-simple/
+          server-dir: public_html/ads-made-simple/
           exclude: |
             **/.git*
             **/.git*/**
